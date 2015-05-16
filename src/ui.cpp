@@ -23,6 +23,7 @@
  *
  */
 
+#include "wxSetup.h"
 #include "ui.h"
 #include "settings.h"
 #include "error.h"
@@ -1358,7 +1359,7 @@ void UI::Run()
     SignalReady();
 
     // Run the app:
-    wxMSWDisableSettingHighDPIAware();
+//    wxMSWDisableSettingHighDPIAware();
     wxEntry(ms_hInstance);
 }
 

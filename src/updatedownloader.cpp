@@ -23,6 +23,7 @@
  *
  */
 
+#include "wxSetup.h"
 #include "updatedownloader.h"
 #include "download.h"
 #include "settings.h"
