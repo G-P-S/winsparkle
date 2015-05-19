@@ -33,10 +33,10 @@
 extern "C"
 BOOL WINAPI DllMain(HINSTANCE hInstance, DWORD dwReason, LPVOID /*lpReserved*/)
 {
-    if ( dwReason == DLL_PROCESS_ATTACH )
-    {
-        winsparkle::UI::SetDllHINSTANCE(hInstance);
-    }
+//    if ( dwReason == DLL_PROCESS_ATTACH )
+//    {
+//        winsparkle::UI::SetDllHINSTANCE(hInstance);
+//    }
 
     return TRUE;
 }

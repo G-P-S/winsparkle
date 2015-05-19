@@ -28,13 +28,13 @@
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <CharacterSet>Unicode</CharacterSet>
     <PlatformToolset>v120_xp</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <CharacterSet>Unicode</CharacterSet>
     <PlatformToolset>v120_xp</PlatformToolset>
@@ -70,15 +70,19 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
+    <OutDir>$(ProjectDir)$(Configuration)\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
+    <OutDir>$(ProjectDir)$(Configuration)\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
+    <OutDir>$(ProjectDir)$(Configuration)\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
+    <OutDir>$(ProjectDir)$(Configuration)\</OutDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -87,12 +91,12 @@
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;XML_STATIC;BUILDING_WIN_SPARKLE;WIN32;_DEBUG;WINSPARKLE_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <MinimalRebuild>false</MinimalRebuild>
-      <AdditionalIncludeDirectories>3rdparty\expat\lib;3rdparty\wxWidgets_setup_h;..\wxWidgets\include;include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>3rdparty\expat\lib;3rdparty\wxWidgets_setup_h;include</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <EnableEnhancedInstructionSet>NoExtensions</EnableEnhancedInstructionSet>
     </ClCompile>
     <ResourceCompile>
-      <AdditionalIncludeDirectories>3rdparty\expat\lib;3rdparty\wxWidgets_setup_h;3rdparty\wxWidgets\include;include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>3rdparty\expat\lib;include</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;XML_STATIC;BUILDING_WIN_SPARKLE;_UNICODE;UNICODE;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ResourceCompile>
     <Link>
@@ -108,11 +112,11 @@
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;XML_STATIC;BUILDING_WIN_SPARKLE;WIN32;_DEBUG;WINSPARKLE_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <MinimalRebuild>false</MinimalRebuild>
-      <AdditionalIncludeDirectories>3rdparty\expat\lib;3rdparty\wxWidgets_setup_h;..\wxWidgets\include;include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>3rdparty\expat\lib;3rdparty\wxWidgets_setup_h;include</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
     <ResourceCompile>
-      <AdditionalIncludeDirectories>3rdparty\expat\lib;3rdparty\wxWidgets_setup_h;3rdparty\wxWidgets\include;include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>3rdparty\expat\lib;include</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;XML_STATIC;BUILDING_WIN_SPARKLE;_UNICODE;UNICODE;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ResourceCompile>
     <Link>
@@ -130,7 +134,7 @@
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;XML_STATIC;BUILDING_WIN_SPARKLE;WIN32;NDEBUG;WINSPARKLE_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <MinimalRebuild>false</MinimalRebuild>
-      <AdditionalIncludeDirectories>3rdparty\expat\lib;3rdparty\wxWidgets_setup_h;..\wxWidgets\include;include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>3rdparty\expat\lib;3rdparty\wxWidgets_setup_h;include</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <EnableEnhancedInstructionSet>NoExtensions</EnableEnhancedInstructionSet>
       <FavorSizeOrSpeed>Size</FavorSizeOrSpeed>
@@ -138,7 +142,7 @@
       <StringPooling>true</StringPooling>
     </ClCompile>
     <ResourceCompile>
-      <AdditionalIncludeDirectories>3rdparty\expat\lib;3rdparty\wxWidgets_setup_h;3rdparty\wxWidgets\include;include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>3rdparty\expat\lib;include</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;XML_STATIC;BUILDING_WIN_SPARKLE;_UNICODE;UNICODE;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ResourceCompile>
     <Link>
@@ -159,14 +163,14 @@
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;XML_STATIC;BUILDING_WIN_SPARKLE;WIN32;NDEBUG;WINSPARKLE_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <MinimalRebuild>false</MinimalRebuild>
-      <AdditionalIncludeDirectories>3rdparty\expat\lib;3rdparty\wxWidgets_setup_h;..\wxWidgets\include;include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>3rdparty\expat\lib;3rdparty\wxWidgets_setup_h;include</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <FavorSizeOrSpeed>Size</FavorSizeOrSpeed>
       <WholeProgramOptimization>true</WholeProgramOptimization>
       <StringPooling>true</StringPooling>
     </ClCompile>
     <ResourceCompile>
-      <AdditionalIncludeDirectories>3rdparty\expat\lib;3rdparty\wxWidgets_setup_h;3rdparty\wxWidgets\include;include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>3rdparty\expat\lib;include</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;XML_STATIC;BUILDING_WIN_SPARKLE;_UNICODE;UNICODE;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ResourceCompile>
     <Link>
@@ -194,6 +198,7 @@
   <ItemGroup>
     <ClInclude Include="include\winsparkle.h" />
     <ClInclude Include="include\winsparkle-version.h" />
+    <ClInclude Include="include\winsparkle_return_codes.h" />
     <ClInclude Include="src\appcast.h" />
     <ClInclude Include="src\appcontroller.h" />
     <ClInclude Include="src\download.h" />

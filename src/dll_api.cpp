@@ -31,6 +31,7 @@
 #include "ui.h"
 #include "updatechecker.h"
 #include "updatedownloader.h"
+#include "winsparkle_return_codes.h"
 
 #include <ctime>
 
@@ -43,7 +44,7 @@ extern "C"
                        Initialization and shutdown
  *--------------------------------------------------------------------------*/
 
-WIN_SPARKLE_API void __cdecl win_sparkle_init()
+WIN_SPARKLE_API int __cdecl win_sparkle_init()
 {
     try
     {
@@ -86,23 +87,30 @@ WIN_SPARKLE_API void __cdecl win_sparkle_init()
             {
                 // Only when the app is launched for the second time, ask the
                 // user for their permission to check for updates.
-                UI::AskForPermission();
+//                UI::AskForPermission();
             }
         }
+
+		return SPARKLE_OK;
     }
     CATCH_ALL_EXCEPTIONS
+
+	return SPARKLE_FAILED;
 }
 
 
-WIN_SPARKLE_API void __cdecl win_sparkle_cleanup()
+WIN_SPARKLE_API int __cdecl win_sparkle_cleanup()
 {
     try
     {
-        UI::ShutDown();
+//        UI::ShutDown();
 
         // FIXME: shut down any worker UpdateChecker and UpdateDownloader threads too
+		return SPARKLE_OK;
     }
     CATCH_ALL_EXCEPTIONS
+
+	return SPARKLE_FAILED;
 }
 
 
@@ -110,53 +118,68 @@ WIN_SPARKLE_API void __cdecl win_sparkle_cleanup()
                                Configuration
  *--------------------------------------------------------------------------*/
 
-WIN_SPARKLE_API void __cdecl win_sparkle_set_appcast_url(const char *url)
+WIN_SPARKLE_API int __cdecl win_sparkle_set_appcast_url(const char *url)
 {
     try
     {
         Settings::SetAppcastURL(url);
+		return SPARKLE_OK;
     }
     CATCH_ALL_EXCEPTIONS
+
+	return SPARKLE_FAILED;
 }
 
-WIN_SPARKLE_API void __cdecl win_sparkle_set_app_details(const wchar_t *company_name,
-                                                         const wchar_t *app_name,
-                                                         const wchar_t *app_version)
+WIN_SPARKLE_API int __cdecl win_sparkle_set_app_details(const wchar_t *company_name,
+                                                        const wchar_t *app_name,
+                                                        const wchar_t *app_version)
 {
     try
     {
         Settings::SetCompanyName(company_name);
         Settings::SetAppName(app_name);
         Settings::SetAppVersion(app_version);
+		return SPARKLE_OK;
     }
     CATCH_ALL_EXCEPTIONS
+
+	return SPARKLE_FAILED;
 }
 
-WIN_SPARKLE_API void __cdecl win_sparkle_set_app_build_version(const wchar_t *build)
+WIN_SPARKLE_API int __cdecl win_sparkle_set_app_build_version(const wchar_t *build)
 {
     try
     {
         Settings::SetAppBuildVersion(build);
+		return SPARKLE_OK;
     }
     CATCH_ALL_EXCEPTIONS
+
+	return SPARKLE_FAILED;
 }
 
-WIN_SPARKLE_API void __cdecl win_sparkle_set_registry_path(const char *path)
+WIN_SPARKLE_API int __cdecl win_sparkle_set_registry_path(const char *path)
 {
     try
     {
         Settings::SetRegistryPath(path);
+		return SPARKLE_OK;
     }
     CATCH_ALL_EXCEPTIONS
+
+	return SPARKLE_FAILED;
 }
 
-WIN_SPARKLE_API void __cdecl win_sparkle_set_automatic_check_for_updates(int state)
+WIN_SPARKLE_API int __cdecl win_sparkle_set_automatic_check_for_updates(int state)
 {
     try
     {
         Settings::WriteConfigValue("CheckForUpdates", state != 0);
+		return SPARKLE_OK;
     }
     CATCH_ALL_EXCEPTIONS
+
+	return SPARKLE_FAILED;
 }
 
 WIN_SPARKLE_API int __cdecl win_sparkle_get_automatic_check_for_updates()
@@ -172,7 +195,7 @@ WIN_SPARKLE_API int __cdecl win_sparkle_get_automatic_check_for_updates()
     return 0;
 }
 
-WIN_SPARKLE_API void __cdecl win_sparkle_set_update_check_interval(int interval)
+WIN_SPARKLE_API int __cdecl win_sparkle_set_update_check_interval(int interval)
 {
     static const int MIN_CHECK_INTERVAL = 3600; // one hour
 
@@ -185,8 +208,12 @@ WIN_SPARKLE_API void __cdecl win_sparkle_set_update_check_interval(int interval)
         }
 
         Settings::WriteConfigValue("UpdateInterval", interval);
+
+		return SPARKLE_OK;
     }
     CATCH_ALL_EXCEPTIONS
+
+	return SPARKLE_FAILED;
 }
 
 WIN_SPARKLE_API int __cdecl win_sparkle_get_update_check_interval()
@@ -219,43 +246,53 @@ WIN_SPARKLE_API time_t __cdecl win_sparkle_get_last_check_time()
     return DEFAULT_LAST_CHECK_TIME;
 }
 
-WIN_SPARKLE_API void __cdecl win_sparkle_set_can_shutdown_callback(win_sparkle_can_shutdown_callback_t callback)
+WIN_SPARKLE_API int __cdecl win_sparkle_set_can_shutdown_callback(win_sparkle_can_shutdown_callback_t callback)
 {
     try
     {
         ApplicationController::SetCanShutdownCallback(callback);
+		return SPARKLE_OK;
     }
     CATCH_ALL_EXCEPTIONS
+
+	return SPARKLE_FAILED;
 }
 
-WIN_SPARKLE_API void __cdecl win_sparkle_set_shutdown_request_callback(win_sparkle_shutdown_request_callback_t callback)
+WIN_SPARKLE_API int __cdecl win_sparkle_set_shutdown_request_callback(win_sparkle_shutdown_request_callback_t callback)
 {
     try
     {
         ApplicationController::SetShutdownRequestCallback(callback);
+		return SPARKLE_OK;
     }
     CATCH_ALL_EXCEPTIONS
+
+	return SPARKLE_FAILED;
 }
 
 /*--------------------------------------------------------------------------*
                               Manual usage
  *--------------------------------------------------------------------------*/
 
-WIN_SPARKLE_API void __cdecl win_sparkle_check_update_with_ui()
+WIN_SPARKLE_API int __cdecl win_sparkle_check_update_with_ui()
 {
     try
     {
         // Initialize UI thread and show progress indicator.
-        UI::ShowCheckingUpdates();
+//        UI::ShowCheckingUpdates();
 
         // Then run the actual check in the background.
         UpdateChecker *check = new ManualUpdateChecker();
         check->Start();
+
+		return SPARKLE_OK;
     }
     CATCH_ALL_EXCEPTIONS
+
+	return SPARKLE_FAILED;
 }
 
-WIN_SPARKLE_API void __cdecl win_sparkle_check_update_without_ui()
+WIN_SPARKLE_API int __cdecl win_sparkle_check_update_without_ui()
 {
     try
     {
@@ -263,8 +300,12 @@ WIN_SPARKLE_API void __cdecl win_sparkle_check_update_without_ui()
         // are available.
         UpdateChecker *check = new UpdateChecker();
         check->Start();
+
+		return SPARKLE_OK;
     }
-    CATCH_ALL_EXCEPTIONS
+	CATCH_ALL_EXCEPTIONS
+
+	return SPARKLE_FAILED;
 }
 
 

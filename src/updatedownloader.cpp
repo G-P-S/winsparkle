@@ -23,16 +23,16 @@
  *
  */
 
-#include "wxSetup.h"
+//#include "wxSetup.h"
 #include "updatedownloader.h"
 #include "download.h"
 #include "settings.h"
 #include "ui.h"
 #include "error.h"
 
-#include <wx/string.h>
+//#include <wx/string.h>
 
-#include <sstream>
+//#include <sstream>
 #include <rpc.h>
 #include <time.h>
 
@@ -127,7 +127,7 @@ struct UpdateDownloadSink : public IDownloadSink
         if ( now == -1 || m_downloaded == m_total ||
              ((double(now - m_lastUpdate) / CLOCKS_PER_SEC) >= 0.1) )
         {
-          UI::NotifyDownloadProgress(m_downloaded, m_total);
+//          UI::NotifyDownloadProgress(m_downloaded, m_total);
           m_lastUpdate = now;
         }
     }
@@ -171,11 +171,11 @@ void UpdateDownloader::Run()
       UpdateDownloadSink sink(*this, tmpdir);
       DownloadFile(m_appcast.DownloadURL, &sink);
       sink.Close();
-      UI::NotifyUpdateDownloaded(sink.GetFilePath(), m_appcast);
+//      UI::NotifyUpdateDownloaded(sink.GetFilePath(), m_appcast);
     }
     catch ( ... )
     {
-        UI::NotifyUpdateError();
+//        UI::NotifyUpdateError();
         throw;
     }
 }

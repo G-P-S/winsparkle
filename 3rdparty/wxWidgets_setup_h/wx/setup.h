@@ -27,6 +27,14 @@
 // compatibility settings
 // ----------------------------------------------------------------------------
 
+#define wxUSE_STD_CONTAINERS_COMPATIBLY 1
+
+#define wxUSE_ADDREMOVECTRL 0
+
+#define wxUSE_ACTIVITYINDICATOR 0
+
+#define wxUSE_TASKBARBUTTON 1
+
 // This setting determines the compatibility with 2.6 API: set it to 0 to
 // flag all cases of using deprecated functions.
 //
