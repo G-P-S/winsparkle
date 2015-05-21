@@ -44,10 +44,10 @@ extern "C"
                        Initialization and shutdown
  *--------------------------------------------------------------------------*/
 
-WIN_SPARKLE_API int __cdecl win_sparkle_init()
+WIN_SPARKLE_API void __cdecl win_sparkle_init()
 {
-    try
-    {
+//    try
+//    {
         // first things first
         UpdateDownloader::CleanLeftovers();
 
@@ -91,11 +91,11 @@ WIN_SPARKLE_API int __cdecl win_sparkle_init()
             }
         }
 
-		return SPARKLE_OK;
-    }
-    CATCH_ALL_EXCEPTIONS
-
-	return SPARKLE_FAILED;
+//		return SPARKLE_OK;
+//    }
+//    CATCH_ALL_EXCEPTIONS
+//
+//	return SPARKLE_FAILED;
 }
 
 

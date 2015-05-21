@@ -64,11 +64,11 @@ extern "C" {
           update is available, the respective UI is shown later from a separate
           thread.
 
-    Returns error code 0 if successful.
+//    Returns error code 0 if successful.
 
     @see win_sparkle_cleanup()
  */
-WIN_SPARKLE_API int __cdecl win_sparkle_init();
+WIN_SPARKLE_API void __cdecl win_sparkle_init();
 
 /**
     Cleans up after WinSparkle.
