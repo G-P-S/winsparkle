@@ -127,7 +127,7 @@ struct UpdateDownloadSink : public IDownloadSink
         if ( now == -1 || m_downloaded == m_total ||
              ((double(now - m_lastUpdate) / CLOCKS_PER_SEC) >= 0.1) )
         {
-//          UI::NotifyDownloadProgress(m_downloaded, m_total);
+          UI::NotifyDownloadProgress(m_downloaded, m_total);
           m_lastUpdate = now;
         }
     }
@@ -171,11 +171,11 @@ void UpdateDownloader::Run()
       UpdateDownloadSink sink(*this, tmpdir);
       DownloadFile(m_appcast.DownloadURL, &sink);
       sink.Close();
-//      UI::NotifyUpdateDownloaded(sink.GetFilePath(), m_appcast);
+      UI::NotifyUpdateDownloaded(sink.GetFilePath(), m_appcast);
     }
-    catch ( ... )
+    catch (std::exception &e)
     {
-//        UI::NotifyUpdateError();
+        UI::NotifyUpdateError(e.what());
         throw;
     }
 }

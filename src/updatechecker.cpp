@@ -243,22 +243,22 @@ void UpdateChecker::Run()
         if ( !appcast.IsValid() || CompareVersions(currentVersion, appcast.Version) >= 0 )
         {
             // The same or newer version is already installed.
-//            UI::NotifyNoUpdates();
+            UI::NotifyNoUpdates();
             return;
         }
 
         // Check if the user opted to ignore this particular version.
         if ( ShouldSkipUpdate(appcast) )
         {
-//            UI::NotifyNoUpdates();
+            UI::NotifyNoUpdates();
             return;
         }
 
-//        UI::NotifyUpdateAvailable(appcast);
+        UI::NotifyUpdateAvailable(appcast);
     }
-    catch ( ... )
+    catch (exception &e)
     {
-//        UI::NotifyUpdateError();
+        UI::NotifyUpdateError(e.what());
         throw;
     }
 }

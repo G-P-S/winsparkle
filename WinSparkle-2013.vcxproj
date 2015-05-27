@@ -196,6 +196,7 @@
     <ClCompile Include="src\updatedownloader.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\winsparkle-ui.h" />
     <ClInclude Include="include\winsparkle.h" />
     <ClInclude Include="include\winsparkle-version.h" />
     <ClInclude Include="include\winsparkle_return_codes.h" />

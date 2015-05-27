@@ -29,6 +29,7 @@
 #include <stddef.h>
 
 #include "winsparkle-version.h"
+#include "winsparkle-ui.h"
 
 #if !defined(BUILDING_WIN_SPARKLE) && defined(_MSC_VER)
 #pragma comment(lib, "WinSparkle.lib")
@@ -64,21 +65,17 @@ extern "C" {
           update is available, the respective UI is shown later from a separate
           thread.
 
-//    Returns error code 0 if successful.
-
     @see win_sparkle_cleanup()
  */
-WIN_SPARKLE_API void __cdecl win_sparkle_init();
+WIN_SPARKLE_API void __cdecl win_sparkle_init(WinSparkleUI *ui);
 
 /**
     Cleans up after WinSparkle.
 
     Should be called by the app when it's shutting down. Cancels any
     pending Sparkle operations and shuts down its helper threads.
- 
-	Returns error code 0 if successful.
 */
-WIN_SPARKLE_API int __cdecl win_sparkle_cleanup();
+WIN_SPARKLE_API void __cdecl win_sparkle_cleanup();
 
 //@}
 
@@ -109,10 +106,8 @@ WIN_SPARKLE_API int __cdecl win_sparkle_cleanup();
     Windows resource named "FeedURL" of type "APPCAST".
 
     @param url  URL of the appcast.
-
-	Returns error code 0 if successful.
 */
-WIN_SPARKLE_API int __cdecl win_sparkle_set_appcast_url(const char *url);
+WIN_SPARKLE_API void __cdecl win_sparkle_set_appcast_url(const char *url);
 
 /**
     Sets application metadata.
@@ -133,10 +128,8 @@ WIN_SPARKLE_API int __cdecl win_sparkle_set_appcast_url(const char *url);
     @since 0.3
 
     @see win_sparkle_set_app_build_version();
-
-	Returns error code 0 if successful.
 */
-WIN_SPARKLE_API int __cdecl win_sparkle_set_app_details(const wchar_t *company_name,
+WIN_SPARKLE_API void __cdecl win_sparkle_set_app_details(const wchar_t *company_name,
                                                          const wchar_t *app_name,
                                                          const wchar_t *app_version);
 
@@ -157,10 +150,8 @@ WIN_SPARKLE_API int __cdecl win_sparkle_set_app_details(const wchar_t *company_n
     @since 0.4
 
     @see win_sparkle_set_app_details()
-
-	Returns error code 0 if successful.
 */
-WIN_SPARKLE_API int __cdecl win_sparkle_set_app_build_version(const wchar_t *build);
+WIN_SPARKLE_API void __cdecl win_sparkle_set_app_build_version(const wchar_t *build);
 
 /**
     Set the registry path where settings will be stored.
@@ -179,10 +170,8 @@ WIN_SPARKLE_API int __cdecl win_sparkle_set_app_build_version(const wchar_t *bui
     @param path  Registry path where settings will be stored.
 
     @since 0.3
-
-	Returns error code 0 if successful.
 */
-WIN_SPARKLE_API int __cdecl win_sparkle_set_registry_path(const char *path);
+WIN_SPARKLE_API void __cdecl win_sparkle_set_registry_path(const char *path);
 
 /**
     Sets whether updates are checked automatically or only through a manual call.
@@ -192,10 +181,8 @@ WIN_SPARKLE_API int __cdecl win_sparkle_set_registry_path(const char *path);
     @param  state  1 to have updates checked automatically, 0 otherwise
 
     @since 0.4
-
-	Returns error code 0 if successful.
 */
-WIN_SPARKLE_API int __cdecl win_sparkle_set_automatic_check_for_updates(int state);
+WIN_SPARKLE_API void __cdecl win_sparkle_set_automatic_check_for_updates(int state);
 
 /**
     Gets the automatic update checking state
@@ -214,11 +201,9 @@ WIN_SPARKLE_API int __cdecl win_sparkle_get_automatic_check_for_updates();
     @param  interval The interval in seconds between checks for updates.
                      The minimum update interval is 3600 seconds (1 hour).
 
-	Returns error code 0 if successful.
-
     @since 0.4
  */
-WIN_SPARKLE_API int __cdecl win_sparkle_set_update_check_interval(int interval);
+WIN_SPARKLE_API void __cdecl win_sparkle_set_update_check_interval(int interval);
 
 /**
     Gets the automatic update interval in seconds.
@@ -256,10 +241,8 @@ typedef int (__cdecl *win_sparkle_can_shutdown_callback_t)();
     @since 0.4
 
     @see win_sparkle_set_shutdown_request_callback()
-
-	Returns error code 0 if successful.
 */
-WIN_SPARKLE_API int __cdecl win_sparkle_set_can_shutdown_callback(win_sparkle_can_shutdown_callback_t callback);
+WIN_SPARKLE_API void __cdecl win_sparkle_set_can_shutdown_callback(win_sparkle_can_shutdown_callback_t callback);
 
 
 /// Callback type for win_sparkle_shutdown_request_callback()
@@ -282,10 +265,8 @@ typedef void (__cdecl *win_sparkle_shutdown_request_callback_t)();
     @since 0.4
 
     @see win_sparkle_set_can_shutdown_callback()
-
-	Returns error code 0 if successful.
 */
-WIN_SPARKLE_API int __cdecl win_sparkle_set_shutdown_request_callback(win_sparkle_shutdown_request_callback_t);
+WIN_SPARKLE_API void __cdecl win_sparkle_set_shutdown_request_callback(win_sparkle_shutdown_request_callback_t);
 
 //@}
 
@@ -314,10 +295,8 @@ WIN_SPARKLE_API int __cdecl win_sparkle_set_shutdown_request_callback(win_sparkl
     This function returns immediately.
 
     @see win_sparkle_check_update_without_ui()
-
-	Returns error code 0 if successful.
 */
-WIN_SPARKLE_API int __cdecl win_sparkle_check_update_with_ui();
+WIN_SPARKLE_API void __cdecl win_sparkle_check_update_with_ui();
 
 /**
     Checks if an update is available.
@@ -334,10 +313,8 @@ WIN_SPARKLE_API int __cdecl win_sparkle_check_update_with_ui();
     @since 0.4
 
     @see win_sparkle_check_update_with_ui()
-
-	Returns error code 0 if successful.
 */
-WIN_SPARKLE_API int __cdecl win_sparkle_check_update_without_ui();
+WIN_SPARKLE_API void __cdecl win_sparkle_check_update_without_ui();
 
 //@}
 

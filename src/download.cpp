@@ -130,7 +130,8 @@ void DownloadFile(const std::string& url, IDownloadSink *sink, int flags)
 
     InetHandle inet = InternetOpen
                       (
-                          MakeUserAgent().c_str(),
+					  L"TestAgent",
+//                          MakeUserAgent().c_str(),
                           INTERNET_OPEN_TYPE_PRECONFIG,
                           NULL, // lpszProxyName
                           NULL, // lpszProxyBypass
