@@ -25,7 +25,7 @@
 
 //#include "wxSetup.h"
 #include "updatedownloader.h"
-#include "download.h"
+#include "downloadHelper.h"
 #include "settings.h"
 #include "ui.h"
 #include "error.h"
@@ -169,7 +169,8 @@ void UpdateDownloader::Run()
       Settings::WriteConfigValue("UpdateTempDir", tmpdir);
 
       UpdateDownloadSink sink(*this, tmpdir);
-      DownloadFile(m_appcast.DownloadURL, &sink);
+      DownloadHelper::DownloadFile(m_appcast.DownloadURL, &sink);
+//      DownloadFile(m_appcast.DownloadURL, &sink);
       sink.Close();
       UI::NotifyUpdateDownloaded(sink.GetFilePath(), m_appcast);
     }

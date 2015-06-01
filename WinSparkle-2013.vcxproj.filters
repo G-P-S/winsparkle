@@ -29,9 +29,6 @@
     <ClInclude Include="src\appcontroller.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\download.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="src\error.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -62,6 +59,15 @@
     <ClInclude Include="include\winsparkle-ui.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="include\winsparkle-downloader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\DefaultDownloader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\downloadHelper.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\appcast.cpp">
@@ -74,9 +80,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\dllmain.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\download.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\error.cpp">
@@ -95,6 +98,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\updatedownloader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\DefaultDownloader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\downloadHelper.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

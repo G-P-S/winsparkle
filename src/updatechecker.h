@@ -29,6 +29,7 @@
 #include "threads.h"
 
 #include <string>
+#include "downloadHelper.h"
 
 namespace winsparkle
 {
@@ -41,6 +42,7 @@ struct Appcast;
     If an update is found, then UpdateChecker initializes the GUI thread
     and shows information about available update to the user.
  */
+
 class UpdateChecker : public Thread
 {
 public:

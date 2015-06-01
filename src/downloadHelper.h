@@ -27,69 +27,52 @@
 #define _download_h_
 
 #include <string>
+#include "winsparkle-downloader.h"
 
 namespace winsparkle
 {
 
-/**
-    Abstraction for storing downloaded data.
- */
-struct IDownloadSink
-{
-    /**
-        Inform the sink of total data size.
+	/**
+		IDownloadSink imlementation for storing data in a string.
+	 */
+	struct StringDownloadSink : public IDownloadSink
+	{
+		virtual void SetLength(size_t) {}
 
-        Note that this is not guaranteed to be called.
-     */
-    virtual void SetLength(size_t len) = 0;
+		virtual void SetFilename(const std::wstring&) {}
 
-    /**
-       Inform the sink of detected filename
-     */
-    virtual void SetFilename(const std::wstring& filename) = 0;
+		virtual void Add(const void *data, size_t len)
+		{
+			this->data.append(reinterpret_cast<const char*>(data), len);
+		}
 
-    /// Add chunk of downloaded data
-    virtual void Add(const void *data, size_t len) = 0;
-};
+		/// Downloaded data, as a string.
+		std::string data;
+	};
 
-/**
-    IDownloadSink imlementation for storing data in a string.
- */
-struct StringDownloadSink : public IDownloadSink
-{
-    virtual void SetLength(size_t) {}
+	/**
+		Downloads a HTTP resource.
 
-    virtual void SetFilename(const std::wstring&) {}
+		Throws on error.
 
-    virtual void Add(const void *data, size_t len)
-    {
-        this->data.append(reinterpret_cast<const char*>(data), len);
-    }
+		@param url   URL of the resource to download.
+		@param sink  Where to put downloaded data.
+		@param flags Or-combination of DownloadFlag values.
 
-    /// Downloaded data, as a string.
-    std::string data;
-};
+		@see CheckConnection()
+	 */
 
+	class DownloadHelper
+	{
+	public:
+		static void SetDownloaderOverride(WinSparkleDownloader *downloader);
 
-/// Flags for DownloadFile().
-enum DownloadFlag
-{
-    /// Don't get resources from cache, always contact the origin server
-    Download_NoCached = 1
-};
+		static void DownloadFile(const std::string& url, IDownloadSink *sink, int flags = 0);
 
-/**
-    Downloads a HTTP resource.
+	private:
+		static WinSparkleDownloader* _downloader;
+	};
 
-    Throws on error.
-
-    @param url   URL of the resource to download.
-    @param sink  Where to put downloaded data.
-    @param flags Or-combination of DownloadFlag values.
-
-    @see CheckConnection()
- */
-void DownloadFile(const std::string& url, IDownloadSink *sink, int flags = 0);
 
 } // namespace winsparkle
 

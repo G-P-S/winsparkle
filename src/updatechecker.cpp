@@ -29,7 +29,7 @@
 #include "ui.h"
 #include "error.h"
 #include "settings.h"
-#include "download.h"
+#include "downloadHelper.h"
 #include "utils.h"
 
 #include <ctime>
@@ -230,7 +230,8 @@ void UpdateChecker::Run()
             throw std::runtime_error("Appcast URL not specified.");
 
         StringDownloadSink appcast_xml;
-        DownloadFile(url, &appcast_xml, GetAppcastDownloadFlags());
+        DownloadHelper::DownloadFile(url, &appcast_xml, GetAppcastDownloadFlags());
+//        DownloadFile(url, &appcast_xml, GetAppcastDownloadFlags());
 
         Appcast appcast = Appcast::Load(appcast_xml.data);
 

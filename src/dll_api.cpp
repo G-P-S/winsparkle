@@ -43,9 +43,10 @@ extern "C"
                        Initialization and shutdown
  *--------------------------------------------------------------------------*/
 
-WIN_SPARKLE_API void __cdecl win_sparkle_init(WinSparkleUI *ui)
+WIN_SPARKLE_API void __cdecl win_sparkle_init(WinSparkleUI *ui, WinSparkleDownloader *downloader)
 {
 	UI::SetUiCallbacks(ui);
+	DownloadHelper::SetDownloaderOverride(downloader);
 
     // first things first
     UpdateDownloader::CleanLeftovers();

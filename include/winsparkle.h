@@ -30,6 +30,7 @@
 
 #include "winsparkle-version.h"
 #include "winsparkle-ui.h"
+#include "winsparkle-downloader.h"
 
 #if !defined(BUILDING_WIN_SPARKLE) && defined(_MSC_VER)
 #pragma comment(lib, "WinSparkle.lib")
@@ -67,7 +68,7 @@ extern "C" {
 
     @see win_sparkle_cleanup()
  */
-WIN_SPARKLE_API void __cdecl win_sparkle_init(WinSparkleUI *ui);
+WIN_SPARKLE_API void __cdecl win_sparkle_init(WinSparkleUI *ui, WinSparkleDownloader *downloader = NULL);
 
 /**
     Cleans up after WinSparkle.
