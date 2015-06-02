@@ -231,7 +231,6 @@ void UpdateChecker::Run()
 
         StringDownloadSink appcast_xml;
         DownloadHelper::DownloadFile(url, &appcast_xml, GetAppcastDownloadFlags());
-//        DownloadFile(url, &appcast_xml, GetAppcastDownloadFlags());
 
         Appcast appcast = Appcast::Load(appcast_xml.data);
 
@@ -262,6 +261,10 @@ void UpdateChecker::Run()
         UI::NotifyUpdateError(e.what());
         throw;
     }
+	catch (...)
+	{
+		UI::NotifyUpdateError(std::string("Unknown error during update!"));
+	}
 }
 
 bool UpdateChecker::ShouldSkipUpdate(const Appcast& appcast) const
