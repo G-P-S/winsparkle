@@ -172,6 +172,8 @@ void UpdateDownloader::Run()
       DownloadHelper::DownloadFile(m_appcast.DownloadURL, &sink);
 //      DownloadFile(m_appcast.DownloadURL, &sink);
       sink.Close();
+	  Settings::WriteConfigValue("UpdateInstallerPath", sink.GetFilePath());
+	  Settings::WriteConfigValue("UpdateInstallerParams", m_appcast.InstallerArguments);
       UI::NotifyUpdateDownloaded(sink.GetFilePath(), m_appcast);
     }
     catch (std::exception &e)

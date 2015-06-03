@@ -117,7 +117,6 @@ vector<string> SplitVersionString(const string& version)
 
 } // anonymous namespace
 
-
 int UpdateChecker::CompareVersions(const string& verA, const string& verB)
 {
     const vector<string> partsA = SplitVersionString(verA);
@@ -215,6 +214,7 @@ int UpdateChecker::CompareVersions(const string& verA, const string& verB)
 
 UpdateChecker::UpdateChecker(): Thread("WinSparkle updates check")
 {
+
 }
 
 
@@ -234,6 +234,7 @@ void UpdateChecker::Run()
 
         Appcast appcast = Appcast::Load(appcast_xml.data);
 
+		Settings::WriteConfigValue("CurrentUpdateVersion", appcast.Version);
         Settings::WriteConfigValue("LastCheckTime", time(NULL));
 
         const std::string currentVersion =
@@ -280,6 +281,14 @@ bool UpdateChecker::ShouldSkipUpdate(const Appcast& appcast) const
     }
 }
 
+void UpdateChecker::SkipCurrentVersion()
+{
+	std::string version;
+	if(!Settings::ReadConfigValue("CurrentUpdateVersion", version))
+		return;
+
+	Settings::WriteConfigValue("SkipThisVersion", version);
+}
 
 /*--------------------------------------------------------------------------*
                             ManualUpdateChecker

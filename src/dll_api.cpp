@@ -147,13 +147,13 @@ WIN_SPARKLE_API int __cdecl win_sparkle_get_automatic_check_for_updates()
 
 WIN_SPARKLE_API void __cdecl win_sparkle_set_update_check_interval(int interval)
 {
-    static const int MIN_CHECK_INTERVAL = 3600; // one hour
-
-    if ( interval < MIN_CHECK_INTERVAL )
-    {
-        winsparkle::LogError("Invalid update interval (min: 3600 seconds)");
-        interval = MIN_CHECK_INTERVAL;
-    }
+//    static const int MIN_CHECK_INTERVAL = 3600; // one hour
+//
+//    if ( interval < MIN_CHECK_INTERVAL )
+//    {
+//        winsparkle::LogError("Invalid update interval (min: 3600 seconds)");
+//        interval = MIN_CHECK_INTERVAL;
+//    }
 
     Settings::WriteConfigValue("UpdateInterval", interval);
 }
@@ -220,5 +220,24 @@ WIN_SPARKLE_API void __cdecl win_sparkle_check_update_without_ui()
     check->Start();
 }
 
+WIN_SPARKLE_API void __cdecl win_sparkle_skip_this_version()
+{
+	UpdateChecker::SkipCurrentVersion();
+}
+
+WIN_SPARKLE_API void __cdecl win_sparkle_install_update()
+{
+	std::string installerPath;
+	std::string installerParams;
+	if (!Settings::ReadConfigValue("UpdateInstallerPath", installerPath))
+		return;
+
+	if (!Settings::ReadConfigValue("UpdateInstallerParams", installerParams))
+		return;
+
+	std::wstring wInstallerPath = AnsiToWide(installerPath);
+	std::wstring wInstallerParams = AnsiToWide(installerParams);
+	ShellExecute(nullptr, L"open", wInstallerPath.c_str(), wInstallerParams.c_str(), nullptr, SW_SHOWNORMAL);
+}
 
 } // extern "C"

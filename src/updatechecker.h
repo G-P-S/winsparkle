@@ -61,6 +61,8 @@ public:
      */
     static int CompareVersions(const std::string& a, const std::string& b);
 
+	static void SkipCurrentVersion();
+
 protected:
     /// Returns flags to be used when checking the appcast
     virtual int GetAppcastDownloadFlags() const { return 0; }

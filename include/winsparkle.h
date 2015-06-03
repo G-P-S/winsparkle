@@ -319,6 +319,25 @@ WIN_SPARKLE_API void __cdecl win_sparkle_check_update_without_ui();
 
 //@}
 
+
+/**
+	The UpdateChecker stores the previously retrieved APPCAST and provides that
+	version to the Settings object - writing the version into the "SkipThisVersion"
+	into the registry.
+
+	If the UpdateChecker has not performed a check, the APPCAST is null and nothing
+	is done.
+*/
+WIN_SPARKLE_API void __cdecl win_sparkle_skip_this_version();
+
+/**
+	Uses the APPCAST stored in the UpdateChecker to begin the installation process.
+
+	If the UpdateChecker has not performed a check, the APPCAST is null and nothing
+	is done.
+*/
+WIN_SPARKLE_API void __cdecl win_sparkle_install_update();
+
 #ifdef __cplusplus
 }
 #endif
