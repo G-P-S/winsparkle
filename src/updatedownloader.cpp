@@ -170,8 +170,10 @@ void UpdateDownloader::Run()
 
       UpdateDownloadSink sink(*this, tmpdir);
       DownloadHelper::DownloadFile(m_appcast.DownloadURL, &sink);
-//      DownloadFile(m_appcast.DownloadURL, &sink);
       sink.Close();
+
+	  CleanPreviousInstaller();
+
 	  Settings::WriteConfigValue("UpdateInstallerPath", sink.GetFilePath());
 	  Settings::WriteConfigValue("UpdateInstallerParams", m_appcast.InstallerArguments);
       UI::NotifyUpdateDownloaded(sink.GetFilePath(), m_appcast);
@@ -213,4 +215,35 @@ void UpdateDownloader::CleanLeftovers()
     // else: try another time, this is just a "soft" error
 }
 
+	void UpdateDownloader::CleanPreviousInstaller()
+	{
+		InternalCleanPendingForRemovalInstallers();
+		InternalCleanLastInstaller();
+	}
+
+	void UpdateDownloader::InternalCleanLastInstaller()
+	{
+		std::string tmpFile;
+		if (!Settings::ReadConfigValue("UpdateInstallerPath", tmpFile))
+			return;
+
+		if (remove(tmpFile.c_str()) != 0)
+		{
+			Settings::WriteConfigValue("PendingCleanup", tmpFile);
+		}
+		
+		Settings::DeleteConfigValue("UpdateInstallerPath");
+	}
+
+	void UpdateDownloader::InternalCleanPendingForRemovalInstallers()
+	{
+		std::string tmpFile;
+		if (!Settings::ReadConfigValue("PendingCleanup", tmpFile))
+			return;
+
+		if (remove(tmpFile.c_str()) != 0)
+			return;
+
+		Settings::DeleteConfigValue("PendingCleanup");
+	}
 } // namespace winsparkle

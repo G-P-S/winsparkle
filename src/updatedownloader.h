@@ -55,13 +55,18 @@ public:
      */
     static void CleanLeftovers();
 
+	static void CleanPreviousInstaller();
+
 protected:
     // Thread methods:
-    virtual void Run();
-    virtual bool IsJoinable() const { return true; }
+    virtual void Run() override;
+    virtual bool IsJoinable() const override { return true; }
 
 private:
     Appcast m_appcast;
+
+	static void InternalCleanLastInstaller();
+	static void InternalCleanPendingForRemovalInstallers();
 };
 
 } // namespace winsparkle

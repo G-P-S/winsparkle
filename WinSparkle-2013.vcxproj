@@ -195,6 +195,7 @@
     <ClCompile Include="src\ui.cpp" />
     <ClCompile Include="src\updatechecker.cpp" />
     <ClCompile Include="src\updatedownloader.cpp" />
+    <ClCompile Include="src\UpdateScheduler.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\winsparkle-downloader.h" />
@@ -204,6 +205,7 @@
     <ClInclude Include="include\winsparkle_return_codes.h" />
     <ClInclude Include="src\appcast.h" />
     <ClInclude Include="src\appcontroller.h" />
+    <ClInclude Include="src\UpdateScheduler.h" />
     <ClInclude Include="src\DefaultDownloader.h" />
     <ClInclude Include="src\downloadHelper.h" />
     <ClInclude Include="src\error.h" />

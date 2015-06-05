@@ -1,5 +1,6 @@
 #ifndef _winsparkle_downloader_h_
 #define _winsparkle_downloader_h_
+
 #include <string>
 
 /**

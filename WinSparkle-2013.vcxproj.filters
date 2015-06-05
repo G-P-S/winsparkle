@@ -68,6 +68,9 @@
     <ClInclude Include="src\downloadHelper.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\UpdateScheduler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\appcast.cpp">
@@ -104,6 +107,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\downloadHelper.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\UpdateScheduler.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

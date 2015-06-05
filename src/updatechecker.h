@@ -29,7 +29,6 @@
 #include "threads.h"
 
 #include <string>
-#include "downloadHelper.h"
 
 namespace winsparkle
 {
@@ -70,9 +69,13 @@ protected:
     /// Should give version be ignored?
     virtual bool ShouldSkipUpdate(const Appcast& appcast) const;
 
+	virtual void UpdateAvailable(const Appcast& appcast);
+	virtual void NotifyNoUpdates();
+	virtual void NotifyUpdateError(const std::string& message);
+
 protected:
-    virtual void Run();
-    virtual bool IsJoinable() const { return false; }
+    virtual void Run() override;
+    virtual bool IsJoinable() const override { return false; }
 };
 
 
@@ -86,8 +89,10 @@ public:
     ManualUpdateChecker() : UpdateChecker() {}
 
 protected:
-    virtual int GetAppcastDownloadFlags() const;
-    virtual bool ShouldSkipUpdate(const Appcast& appcast) const;
+    virtual int GetAppcastDownloadFlags() const override;
+	virtual bool ShouldSkipUpdate(const Appcast& appcast) const override;
+
+	virtual void UpdateAvailable(const Appcast& appcast) override;
 };
 
 } // namespace winsparkle

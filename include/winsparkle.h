@@ -68,7 +68,7 @@ extern "C" {
 
     @see win_sparkle_cleanup()
  */
-WIN_SPARKLE_API void __cdecl win_sparkle_init(WinSparkleUI *ui, WinSparkleDownloader *downloader = NULL);
+	WIN_SPARKLE_API void __cdecl win_sparkle_init(WinSparkleUI *ui, WinSparkleDownloader *downloader = NULL);
 
 /**
     Cleans up after WinSparkle.
@@ -195,6 +195,22 @@ WIN_SPARKLE_API void __cdecl win_sparkle_set_automatic_check_for_updates(int sta
     @since 0.4
  */
 WIN_SPARKLE_API int __cdecl win_sparkle_get_automatic_check_for_updates();
+
+/**
+	The scheduler frequency determines how often the scheduler checks to see if
+	it should reach out to the appcast server. It is simply a value that determines
+	how often the scheduler does the DateTime.Now vs. DateTime.WhenToCheck comparison.
+
+	Defaults to 10 minutes (600 seconds).
+
+*/
+WIN_SPARKLE_API void __cdecl win_sparkle_set_automatic_scheduler_frequency(int frequencySeconds);
+
+/**
+	Retrieves the scheduler check frequency.
+
+*/
+WIN_SPARKLE_API int __cdecl win_sparkle_get_automatic_scheduler_frequency();
 
 /**
     Sets the automatic update interval.
